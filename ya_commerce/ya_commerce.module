@@ -166,6 +166,10 @@ function ya_commerce_redirect_form($form, &$form_state, $order, $payment_method)
     $cancel_url = ya_commerce_get_checkout_url($order, false);
     drupal_goto($cancel_url);
   }
+  else {
+    // create success commerce transaction
+    ya_commerce_create_commerce_transaction($transaction, COMMERCE_PAYMENT_STATUS_SUCCESS, '');
+  }
 
   $target_url = yamoney_get_order_submission_url();
   $params = yamoney_get_order_submission_params($transaction);
